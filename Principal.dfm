@@ -1,6 +1,6 @@
 object frmPrincipal: TfrmPrincipal
-  Left = 232
-  Top = 245
+  Left = 223
+  Top = 166
   Width = 928
   Height = 480
   Caption = 'Escolha o T'#243'pico que deseja verificar'

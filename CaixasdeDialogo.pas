@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls, Printers, DB, DBTables, DBCtrls,
-  Grids, DBGrids;
+  Grids, DBGrids, StrUtils, ExtDlgs ;
 
 type
   TfrmCaixasdeDialogo = class(TForm)
@@ -19,7 +19,7 @@ type
     pcDialogs: TPageControl;
     tsOpenDialog: TTabSheet;
     lbFileNamesTitleOpen: TLabel;
-    Label3: TLabel;
+    lbPropriedadeseVariaveis: TLabel;
     lbFileNamesResultOpen: TLabel;
     lbAllowMultSelectTitleOpen: TLabel;
     lbFilesResultOpen: TLabel;
@@ -32,27 +32,14 @@ type
     lbFilterExemploOpen: TLabel;
     lbInitialDirTitleOpen: TLabel;
     lbInitialDirDesOpen: TLabel;
-    lbCreatePromptTitleOpen: TLabel;
-    lbCreatePromptDesOpen: TLabel;
-    lbFileMustExistTitleOpen: TLabel;
-    lbFileMustExistDesOpen: TLabel;
-    lbHideReadOnlyTitleOpen: TLabel;
-    lbHideReadOnlyDesOpen: TLabel;
-    lbShowHelpTitleOpen: TLabel;
-    lbShowHelpDesOpen: TLabel;
     lbTitleTitleOpen: TLabel;
     lbTitleDesOpen: TLabel;
-    lbDesMemoOpen: TLabel;
     edtInitialDirOpen: TEdit;
-    memoOpen: TMemo;
     memoFilterOpen: TMemo;
     edtDefaultExtOpen: TEdit;
     edtTitleOpen: TEdit;
     tsSaveDialog: TTabSheet;
-    lbOverWritePromptDesSave: TLabel;
-    lbOverWritePromptTitleSave: TLabel;
     lbPropriedadesVariaveisTitle: TLabel;
-    lbDesMemoSave: TLabel;
     lbFileNamesTitleSave: TLabel;
     lbFileNamesResultSave: TLabel;
     lbAllowMultSelectTitleSave: TLabel;
@@ -65,43 +52,14 @@ type
     lbFilterDesSave: TLabel;
     lbInitialDirTitleSave: TLabel;
     lbInitialDirDesSave: TLabel;
-    lbCreatePromptTitleSave: TLabel;
-    lbCreatePromptDesSave: TLabel;
-    lbFileMustExistTitleSave: TLabel;
-    lbFileMustExistDesSave: TLabel;
-    lbHideReadOnlyTitleSave: TLabel;
-    lbHideReadOnlyDesSave: TLabel;
-    lbShowHelpTitleSave: TLabel;
-    lbShowHelpDesSave: TLabel;
     lbTitleTitleSave: TLabel;
     lbTitleDesSave: TLabel;
-    MemoSave: TMemo;
     edtInitialDirSave: TEdit;
     edtDefaultExtSave: TEdit;
     memoFilterSave: TMemo;
     edtTitleSave: TEdit;
     tsPrintSetupDialog: TTabSheet;
     tsPrintDialog: TTabSheet;
-    lbTitleCopiesPrint: TLabel;
-    lbCopiesDesPrint: TLabel;
-    lbCollateTitlePrint: TLabel;
-    lbCollateDesPrint: TLabel;
-    lbFromtoPageTitlePrint: TLabel;
-    lbFromToPageDesPrint: TLabel;
-    lbMaxMinPageTitlePrint: TLabel;
-    lbMaxMinPageDesPrint: TLabel;
-    lbPoPageNumsTitlePrint: TLabel;
-    lbpoPageNumsDesPrint: TLabel;
-    lbpoPrintToFileDesPrint: TLabel;
-    lbpoPrintToFileTitlePrint: TLabel;
-    lbpoSelecionTitlePrint: TLabel;
-    lbpoSelecionDesPrint: TLabel;
-    lbpoWarningDesPrint: TLabel;
-    lbpoWarningTitlePrint: TLabel;
-    lbpoPrintRangeTitlePrint: TLabel;
-    lbpoPrintRangeDesPrint: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
     Panel2: TPanel;
     lbInstrucoesMemoPrint: TLabel;
     memoPrint: TMemo;
@@ -127,13 +85,150 @@ type
     lbFindTextTitleFind: TLabel;
     lbFindTextDesFind: TLabel;
     edtFindTextFind: TEdit;
-    lbPositionTitleFind: TLabel;
-    lbPositionDesFind: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
     MemoFind: TMemo;
     lbMemoFind: TLabel;
     FindDialog1: TFindDialog;
+    gbMaisPropriedadesOpen: TGroupBox;
+    lbCreatePromptTitleOpen: TLabel;
+    lbCreatePromptDesOpen: TLabel;
+    lbFileMustExistTitleOpen: TLabel;
+    lbFileMustExistDesOpen: TLabel;
+    lbHideReadOnlyTitleOpen: TLabel;
+    lbHideReadOnlyDesOpen: TLabel;
+    lbShowHelpTitleOpen: TLabel;
+    lbShowHelpDesOpen: TLabel;
+    pnMemoOpen: TPanel;
+    lbDesMemoOpen: TLabel;
+    memoOpen: TMemo;
+    pnMemoSave: TPanel;
+    lbDesMemoSave: TLabel;
+    MemoSave: TMemo;
+    gbMaisPropriedadesSave: TGroupBox;
+    lbCreatePromptTitleSave: TLabel;
+    lbCreatePromptDesSave: TLabel;
+    lbFileMustExistTitleSave: TLabel;
+    lbFileMustExistDesSave: TLabel;
+    lbHideReadOnlyTitleSave: TLabel;
+    lbHideReadOnlyDesSave: TLabel;
+    lbShowHelpTitleSave: TLabel;
+    lbShowHelpDesSave: TLabel;
+    lbOverWritePromptTitleSave: TLabel;
+    lbOverWritePromptDesSave: TLabel;
+    gbMaisPropriedadesPrint: TGroupBox;
+    lbTitleCopiesPrint: TLabel;
+    lbCopiesDesPrint: TLabel;
+    lbCollateTitlePrint: TLabel;
+    lbCollateDesPrint: TLabel;
+    lbFromtoPageTitlePrint: TLabel;
+    lbFromToPageDesPrint: TLabel;
+    lbMaxMinPageTitlePrint: TLabel;
+    lbMaxMinPageDesPrint: TLabel;
+    lbPoPageNumsTitlePrint: TLabel;
+    lbpoPageNumsDesPrint: TLabel;
+    lbpoPrintToFileDesPrint: TLabel;
+    lbpoPrintToFileTitlePrint: TLabel;
+    lbpoSelecionTitlePrint: TLabel;
+    lbpoSelecionDesPrint: TLabel;
+    lbpoWarningDesPrint: TLabel;
+    lbpoWarningTitlePrint: TLabel;
+    lbpoPrintRangeTitlePrint: TLabel;
+    lbpoPrintRangeDesPrint: TLabel;
+    lbPrintToFileTitlePrint: TLabel;
+    lbPrintToFileDesPrint: TLabel;
+    gbMaisPropriedadesFind: TGroupBox;
+    lbPositionTitleFind: TLabel;
+    lbPositionDesFind: TLabel;
+    lbTopLeftTitleFind: TLabel;
+    lbTopLefDesFind: TLabel;
+    lbDisableMatchCaseTitleFind: TLabel;
+    lbDisableMatchCaseDesFind: TLabel;
+    lbDisableUpDownTitleFInd: TLabel;
+    lbDisableUpDownDesFInd: TLabel;
+    lbDisableWholeWordTitleFind: TLabel;
+    lbDisableWholeWordDesFind: TLabel;
+    lbFindNextTitleFind: TLabel;
+    lbFindNextDesFind: TLabel;
+    lbHideMatchCaseTitleFind: TLabel;
+    lbHideMatchCaseDesFind: TLabel;
+    lbHideUpDownTitleFind: TLabel;
+    lbHideUpDownDesFind: TLabel;
+    lbHideWholeWordTitleFind: TLabel;
+    lbHideWholeWordDesFind: TLabel;
+    lbMatchCaseTitleFind: TLabel;
+    lbMatchCaseDesFind: TLabel;
+    lbWholeWordTitleFind: TLabel;
+    lbWholeWordDesFind: TLabel;
+    ReplaceDialog1: TReplaceDialog;
+    memoReplace: TMemo;
+    lblDescricaoMemoReplace: TLabel;
+    FindDialog2: TFindDialog;
+    gbMaisPropriedadesReplace: TGroupBox;
+    lbPositionTitleReplace: TLabel;
+    lbPositionDesReplace: TLabel;
+    lbTopeLeftTitleReplace: TLabel;
+    lbTopeLeftDesReplace: TLabel;
+    lbDisableMatchCaseTitleReplace: TLabel;
+    lbDisableMatchCaseDesReplace: TLabel;
+    lbDiableUpDownTitleReplace: TLabel;
+    lbDiableUpDownDesReplace: TLabel;
+    lbDisableWholeWordTitleReplace: TLabel;
+    lbDisableWholeWordDesReplace: TLabel;
+    lbFindNextTitleReplace: TLabel;
+    lbFindNextDesReplace: TLabel;
+    lbHideMatchCaseTitleReplace: TLabel;
+    lbHideMatchCaseDesReplace: TLabel;
+    lbHideUpDownTitleReplace: TLabel;
+    lbHideUpDownDesReplace: TLabel;
+    lbHideWholeWordTitleReplace: TLabel;
+    lbHideWholeWordDesReplace: TLabel;
+    lbMatchCaseTitleReplace: TLabel;
+    lbMatchCaseDesReplace: TLabel;
+    lbWholeWordTitleReplace: TLabel;
+    lbWholeWordDesReplace: TLabel;
+    lbMaxMinFontSizeTitleFonte: TLabel;
+    lbMaxMinFontSizeDesFonte: TLabel;
+    lbLimitSizeTitleFont: TLabel;
+    lbLimitSizeDesFont: TLabel;
+    FontDialog1: TFontDialog;
+    Panel1: TPanel;
+    lbDescricaoMemoFonte: TLabel;
+    memoFonte: TMemo;
+    cbMaisPropriedadesFonte: TGroupBox;
+    lbApplyButtonTitleFonte: TLabel;
+    lbApplyButtonDesFonte: TLabel;
+    tbEffectsDesFonte: TLabel;
+    tbEffectsTitleFonte: TLabel;
+    tbShowHelpTitleFonte: TLabel;
+    tbShowHelpDesFonte: TLabel;
+    lbTrueTypeOnlyTitleFonte: TLabel;
+    lbTrueTypeOnlyDesFonte: TLabel;
+    lbDeviceTitleFonte: TLabel;
+    lbDeviceDesFonte: TLabel;
+    lbFonteTitleFonte: TLabel;
+    lbFonteDesFonte: TLabel;
+    edtMaxMinFontSizeMin: TEdit;
+    edtMaxMinFontSizeMax: TEdit;
+    lbMinFonte: TLabel;
+    lbMaxFonte: TLabel;
+    cbLimitSize: TCheckBox;
+    ColorDialog1: TColorDialog;
+    cbMaisPropriedadesColor: TGroupBox;
+    lbColorTitleColor: TLabel;
+    lbColorDesColor: TLabel;
+    lbCustomColorTitleColor: TLabel;
+    lbCustomColorDesColor: TLabel;
+    cbCustomColorBlue: TCheckBox;
+    cbCustomColorRed: TCheckBox;
+    cbCustomColorYellow: TCheckBox;
+    cbCustomColorGreen: TCheckBox;
+    lbSolidColorTitleColor: TLabel;
+    lbSolidColorDesColor: TLabel;
+    lbFullOpenTitleColor: TLabel;
+    lbFullOpenDesColor: TLabel;
+    cbFullOpenColor: TCheckBox;
+    Label1: TLabel;
+    OpenPictureDialog1: TOpenPictureDialog;
+    SavePictureDialog1: TSavePictureDialog;
     procedure btnOpenDialogClick(Sender: TObject);
     procedure tsOpenDialogShow(Sender: TObject);
     procedure btnSaveDialogClick(Sender: TObject);
@@ -142,11 +237,28 @@ type
     procedure btnPrintDiaogClick(Sender: TObject);
     procedure btnPageSetupDialogClick(Sender: TObject);
     procedure btnFindDialogClick(Sender: TObject);
+    procedure FindDialog1Find(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure ReplaceDialog1Replace(Sender: TObject);
+    procedure FindDialog2Find(Sender: TObject);
+    procedure btnReplaceDialogClick(Sender: TObject);
+    procedure ReplaceDialog1Find(Sender: TObject);
+    procedure FontDialog1Apply(Sender: TObject; Wnd: HWND);
+    procedure btnFontDialogClick(Sender: TObject);
+    procedure edtMaxMinFontSizeMinKeyPress(Sender: TObject; var Key: Char);
+    procedure edtMaxMinFontSizeMaxExit(Sender: TObject);
+    procedure btnColorDialogClick(Sender: TObject);
+    procedure btnOpenPictureDialogClick(Sender: TObject);
+    procedure tsOpenPictureDialogContextPopup(Sender: TObject;
+      MousePos: TPoint; var Handled: Boolean);
   private
     { Private declarations }
     procedure imprimirMemo;
     procedure imprimirTable;
     procedure imprimirFormulario;
+    //function Localizar(const StrOri, StrLoc: string; const PosInicial: Longint; DifMaieMin: Boolean = False; ParaCima: Boolean = False; CoincidirPalavra: Boolean = False): Longint;
   public
     { Public declarations }
   end;
@@ -369,7 +481,237 @@ end;
 
 procedure TfrmCaixasdeDialogo.btnFindDialogClick(Sender: TObject);
 begin
-   FindDialog1.Execute;
+// precisei colocar no uses o MathStrUtils
+// Esta função é usada em conjunto com o Dialog do Windows (FindDialog)
+// Passe o Memo1.Text no StrOri e a string a localizar no StrLoc
+// PosInicial       = é de onde parte a pesquisa
+// DifMaieMin       = é para diferencial maiusculas e minusculas.
+// ParaCima         = vai da posicao inicial para cima.
+// CoincidirPalavra = encontra somente palavra inteira
+  FindDialog1.FindText := edtFindTextFind.Text;
+  //FindDialog1.Options  := [frDown,frShowHelp];
+  FindDialog1.Execute;
+end;
+
+function Localizar(const StrOri, StrLoc: string; const PosInicial: Longint; DifMaieMin: Boolean = False; ParaCima: Boolean = False; CoincidirPalavra: Boolean = False): Longint;
+var
+  I    : Longint;
+  Achou: Boolean;
+
+  // esta rotina confere de a letra anterior/posterior a palavra fecha com vazio ou não letra-numero.
+  procedure ConferePalavraInteira;
+  begin
+    if Achou and CoincidirPalavra then
+    begin
+     if ((IfThen(I = 0, '', Copy(StrOri, I - 1, 1)) <> '') and (Copy(StrOri, I - 1, 1)[1] in ['0'..'9','A'..'Z','a'..'z'])) or
+         ((IfThen(I = 0, '', Copy(StrOri, I + Length(StrLoc), 1)) <> '') and (Copy(StrOri, I + Length(StrLoc), 1)[1] in ['0'..'9','A'..'Z','a'..'z'])) then
+        Achou := False;
+    end;
+  end;
+begin
+  Result := -1;
+  if ParaCima then // se for para cima ele faz o for (loop) diminuindo o valor.
+  begin
+    for I := PosInicial - Length(StrLoc) downto 0 do
+    begin
+      if DifMaieMin then // a var achou deve ser TRUE para sair do looping achando a string
+        Achou := StrLoc = Copy(StrOri, I, Length(StrLoc))
+      else
+        Achou := AnsiUpperCase(StrLoc) = AnsiUpperCase(Copy(StrOri, I, Length(StrLoc)));
+
+      ConferePalavraInteira;
+      if Achou then
+      begin
+        Result := I - 1; // contém a POSICAO do bicho.
+        if Result < 0 then Result := 0;
+        Break;
+      end;
+    end;
+  end
+  else  // Normal, do cursor para baixo
+    for I := PosInicial to (Length(StrOri) - Length(StrLoc) + 1) do
+    begin
+      if DifMaieMin then
+        Achou := StrLoc = Copy(StrOri, I, Length(StrLoc))
+      else
+        Achou := AnsiUpperCase(StrLoc) = AnsiUpperCase(Copy(StrOri, I, Length(StrLoc)));
+
+      ConferePalavraInteira;
+      if Achou then
+      begin
+        Result := I - 1;
+        if Result < 0 then Result := 0;
+        Break;
+      end;
+    end;
+end;
+
+procedure TfrmCaixasdeDialogo.FindDialog1Find(Sender: TObject);
+var
+  P: Integer;
+begin
+  FindDialog1.CloseDialog;
+  P:= Localizar( MemoFind.Text, FindDialog1.FindText, MemoFind.SelStart + MemoFind.SelLength,frMatchCase in FindDialog1.Options, not (frDown in FindDialog1.Options), frWholeWord in FindDialog1.Options);
+  if P > -1 then
+  begin
+    MemoFind.SelStart  := P;
+    MemoFind.SelLength := Length(FindDialog1.FindText);
+    MemoFind.SetFocus;
+  end else
+  begin
+    if Application.MessageBox('Fim da Pesquisa! Deseja Coltar Para o Início do Documento?','Pesquisa', mb_yesno + mb_iconquestion) = id_yes then
+       MemoFind.SelStart  := 1;  
+  end;
+end;
+
+procedure TfrmCaixasdeDialogo.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  // Ctrl+F ou Ctrl+F3 abre a tela de localizar
+  // F3 = caso já esteja procurando, repete pesquisa senão abre também a tela.
+  if Key = Vk_F3 then
+    if (FindDialog1.FindText <> '') and (not (ssCtrl in Shift)) then
+      FindDialog1Find(Self)
+    else
+      FindDialog1.Execute;
+  // Ctrl + F abre a pesquisa denovo
+  if ((Key = 70) or (Key = 102)) and (ssCtrl in Shift) then FindDialog1.Execute;
+end;
+
+procedure TfrmCaixasdeDialogo.FormShow(Sender: TObject);
+begin
+  // Garantir que esta no inicio do documento do memo
+  MemoFind.SelStart     := 1;
+  memoReplace.SelStart  := 1;
+end;
+
+procedure TfrmCaixasdeDialogo.ReplaceDialog1Replace(Sender: TObject);
+begin
+
+  While True do begin
+    if memoReplace.SelText <> ReplaceDialog1.FindText then
+      FindDialog2Find(Sender);
+
+    if memoReplace.SelLength = 0 then
+      break;
+
+    memoReplace.SelText := ReplaceDialog1.ReplaceText;
+    
+    if not ( frReplaceAll in ReplaceDialog1.Options) then
+      break;
+  end;
+
+end;
+
+procedure TfrmCaixasdeDialogo.FindDialog2Find(Sender: TObject);
+var
+  PTexto, PAux : PChar;
+  TextoProcura : String;
+begin
+  TextoProcura := (Sender as TFindDialog).FindText;
+
+  PTexto := PChar(memoReplace.Text);
+
+  PAux := PTexto + memoReplace.SelStart + memoReplace.SelLength;
+
+  PAux := StrPos(PAux, PChar(TextoProcura));
+
+  if PAux = nil then begin
+    if Application.MessageBox(Pchar('Não foi possível localizar "' + TextoProcura + '"' + ' Deseja Coltar Para o Início do Documento?'),Pchar('Pesquisa'), mb_yesno + mb_iconquestion) = id_yes then
+      memoReplace.SelStart  := 1;
+    exit;
+  end;
+
+  memoReplace.SelStart := PAux - PTexto;
+
+  memoReplace.SelLength := Length(TextoProcura);
+
+  memoReplace.SetFocus;
+
+end;
+
+procedure TfrmCaixasdeDialogo.btnReplaceDialogClick(Sender: TObject);
+begin
+  ReplaceDialog1.Execute;
+end;
+
+procedure TfrmCaixasdeDialogo.ReplaceDialog1Find(Sender: TObject);
+begin
+  FindDialog2Find(Sender);
+end;
+
+procedure TfrmCaixasdeDialogo.FontDialog1Apply(Sender: TObject; Wnd: HWND);
+begin
+  memoFonte.Font.Assign(FontDialog1.Font);
+
+  {memoFonte.Font.Name  := FontDialog1.Font.Name;
+  memoFonte.Font.Size  := FontDialog1.Font.Size;
+  memoFonte.Font.Color := FontDialog1.Font.Color;
+  memoFonte.Font.Style := FontDialog1.Font.Style;}
+
+end;
+
+procedure TfrmCaixasdeDialogo.btnFontDialogClick(Sender: TObject);
+begin
+  if cbLimitSize.Checked = true then begin
+    if edtMaxMinFontSizeMax.Text <> '' then
+      FontDialog1.MaxFontSize := StrToInt(edtMaxMinFontSizeMax.Text);
+    if edtMaxMinFontSizeMin.Text <> '' then
+      FontDialog1.MinFontSize := StrToInt(edtMaxMinFontSizeMin.Text);
+      FontDialog1.Options := FontDialog1.Options + [fdLimitSize];
+  end else
+    FontDialog1.Options := FontDialog1.Options - [fdLimitSize];
+
+  FontDialog1.Execute;
+end;
+
+procedure TfrmCaixasdeDialogo.edtMaxMinFontSizeMinKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (key in['0'..'9',#8]) then key := #0;
+end;
+
+procedure TfrmCaixasdeDialogo.edtMaxMinFontSizeMaxExit(Sender: TObject);
+begin
+  if StrToInt(edtMaxMinFontSizeMin.text) > StrToInt(edtMaxMinFontSizeMax.text) then begin
+    showmessage('Mínimo é maior que o Máximo');
+    edtMaxMinFontSizeMin.text := '';
+    edtMaxMinFontSizeMax.text := '';
+  end;
+end;
+
+procedure TfrmCaixasdeDialogo.btnColorDialogClick(Sender: TObject);
+begin
+  if cbFullOpenColor.Checked = true then
+    ColorDialog1.Options := ColorDialog1.Options + [cdFullOpen]
+  else
+    ColorDialog1.Options := ColorDialog1.Options - [cdFullOpen];
+
+  ColorDialog1.CustomColors.Clear;
+  if cbCustomColorBlue.Checked = true then
+     ColorDialog1.CustomColors.Add('ColorA=ff0000');
+
+  if cbCustomColorRed.Checked = true then
+     ColorDialog1.CustomColors.Add('ColorB=0000ff');
+
+  if cbCustomColorYellow.Checked = true then
+     ColorDialog1.CustomColors.Add('ColorC=FFFF00');
+
+  if cbCustomColorGreen.Checked = true then
+     ColorDialog1.CustomColors.Add('ColorD=008000');
+              
+  ColorDialog1.Execute;
+end;
+
+procedure TfrmCaixasdeDialogo.btnOpenPictureDialogClick(Sender: TObject);
+begin
+  Open
+end;
+
+procedure TfrmCaixasdeDialogo.tsOpenPictureDialogContextPopup(
+  Sender: TObject; MousePos: TPoint; var Handled: Boolean);
+begin
+  OpenPictureDialog1.Execute;
 end;
 
 end.
