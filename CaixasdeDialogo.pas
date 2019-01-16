@@ -229,6 +229,51 @@ type
     Label1: TLabel;
     OpenPictureDialog1: TOpenPictureDialog;
     SavePictureDialog1: TSavePictureDialog;
+    tsOutrasDialog: TTabSheet;
+    gbMessageDlg: TGroupBox;
+    btnMessageDlg: TButton;
+    cbMessageDlg: TComboBox;
+    edtTituloMessageDlg: TEdit;
+    lbTituloMessageDlg: TLabel;
+    memoMessageDlg: TMemo;
+    gbAlgunsBotoesMessageDlg: TGroupBox;
+    cbNO: TCheckBox;
+    cbYES: TCheckBox;
+    cbOKCancel: TCheckBox;
+    lbOutrosBotoesMessageDlg: TLabel;
+    lbResultadoDlg: TLabel;
+    gbMessageBox: TGroupBox;
+    btnMessageBox: TButton;
+    cbMessageBoxIcone: TComboBox;
+    cbMessageBoxBotoes: TComboBox;
+    lbcbMessageBoxIcone: TLabel;
+    lbMessageBoxBotoes: TLabel;
+    edtMensagemMessageBox: TEdit;
+    lbMensagemMessageBox: TLabel;
+    edtTituloMessageBox: TEdit;
+    lbTituloMessageBox: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    gbInputBox: TGroupBox;
+    btnInputBox: TButton;
+    lbInputBox: TLabel;
+    edtTituloInputBox: TEdit;
+    lbTituloInputBox: TLabel;
+    edtMensagemInputBox: TEdit;
+    lblMensagemInputBox: TLabel;
+    edtTextoPadraoInputBox: TEdit;
+    Label5: TLabel;
+    cbInputQuery: TGroupBox;
+    Label6: TLabel;
+    btnInputQuery: TButton;
+    gbShowMessageFmt: TGroupBox;
+    btnShowMessageFmt: TButton;
+    lbExemploShowMessageFmt: TLabel;
+    lbAlertaMessageBox: TLabel;
+    tsDialogPersonalizado: TTabSheet;
+    Button1: TButton;
+    lbFolderDialogResultado: TLabel;
     procedure btnOpenDialogClick(Sender: TObject);
     procedure tsOpenDialogShow(Sender: TObject);
     procedure btnSaveDialogClick(Sender: TObject);
@@ -250,9 +295,15 @@ type
     procedure edtMaxMinFontSizeMinKeyPress(Sender: TObject; var Key: Char);
     procedure edtMaxMinFontSizeMaxExit(Sender: TObject);
     procedure btnColorDialogClick(Sender: TObject);
-    procedure btnOpenPictureDialogClick(Sender: TObject);
     procedure tsOpenPictureDialogContextPopup(Sender: TObject;
       MousePos: TPoint; var Handled: Boolean);
+    procedure btnInputBoxClick(Sender: TObject);
+    procedure btnInputQueryClick(Sender: TObject);
+    procedure btnShowMessageFmtClick(Sender: TObject);
+    procedure btnMessageDlgClick(Sender: TObject);
+    procedure cbOKCancelExit(Sender: TObject);
+    procedure btnMessageBoxClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure imprimirMemo;
@@ -268,7 +319,7 @@ var
 
 implementation
 
-uses Principal;
+uses Principal, Folderdlg;
 
 {$R *.dfm}
 
@@ -703,15 +754,132 @@ begin
   ColorDialog1.Execute;
 end;
 
-procedure TfrmCaixasdeDialogo.btnOpenPictureDialogClick(Sender: TObject);
-begin
-  Open
-end;
-
 procedure TfrmCaixasdeDialogo.tsOpenPictureDialogContextPopup(
   Sender: TObject; MousePos: TPoint; var Handled: Boolean);
 begin
   OpenPictureDialog1.Execute;
+end;
+
+procedure TfrmCaixasdeDialogo.btnInputBoxClick(Sender: TObject);
+begin
+  lbInputBox.Caption := 'Resultado Input Box: ' + InputBox(Pchar(edtTituloInputBox.Text), PChar(edtMensagemInputBox.Text), PChar(edtTextoPadraoInputBox.Text));
+end;
+
+procedure TfrmCaixasdeDialogo.btnInputQueryClick(Sender: TObject);
+var
+  Texto : String;
+begin
+  Texto := Caption;
+
+  // o próprio input retorna true ou false
+  if InputQuery('Título Formulário', 'Digite o novo título da janela: (voce não vê mas eu retorno True ou False) ', Texto) then Caption := Texto;
+
+end;
+
+procedure TfrmCaixasdeDialogo.btnShowMessageFmtClick(Sender: TObject);
+begin
+  // siga a sequencia dos argumento, mas s é pra string e d é de inteiro
+  ShowMessageFmt('O nome do formulário %s e o top %d e %d left estao sendo passados como argumento direto no texto',[Caption, Left, Top]);
+end;
+
+procedure TfrmCaixasdeDialogo.btnMessageDlgClick(Sender: TObject);
+var
+  sBotoes : String;
+  Buttons : TMsgDlgButtons;
+  TypeDLG    : TMsgDlgType;
+begin
+  // Define o texto apresentavel, tipo da caixa, quais botões vai ter e um valor para o identificador do tópico para a Ajuda
+
+  IF (cbYES.Checked = true or cbNO.Checked = true) and cbOKCancel.Checked = true then
+  begin
+     showmessage('Escolha entre (Yes e No) ou OKCancel');
+     abort;
+  end;
+
+  if (cbYES.Checked = false) and (cbNO.Checked = false)
+  then
+  begin
+     if cbOKCancel.Checked = false then begin
+       showmessage('Escolha pelo menos um Botão e informe uma Mensagem');
+       abort;
+     end else begin
+       if edtTituloMessageDlg.Text = '' then begin
+          showmessage('Escolha pelo menos um Botão e informe uma Mensagem');
+          abort;
+       end;
+     end;
+  end else begin
+       if edtTituloMessageDlg.Text = '' then begin
+          showmessage('Escolha pelo menos um Botão e informe uma Mensagem');
+          abort;
+       end;
+  end;
+
+  if (cbYES.Checked = true) or (cbNO.Checked = true) then
+  begin
+     if cbYES.Checked = true then
+        Buttons := [mbYes];
+     if cbNO.Checked = true then
+        Buttons := [mbNo];
+     if cbYES.Checked = true and cbNO.Checked = true then
+        Buttons := [mbYes, mbNo];
+   end;
+
+     if cbMessageDlg.ItemIndex = 0 then
+        TypeDLG := mtWarning
+     else if cbMessageDlg.ItemIndex = 1 then
+        TypeDLG := mtError
+     else if cbMessageDlg.ItemIndex = 2 then
+        TypeDLG := mtInformation
+     else if cbMessageDlg.ItemIndex = 3 then
+        TypeDLG := mtConfirmation
+     else if cbMessageDlg.ItemIndex = 4 then
+        TypeDLG := mtCustom;
+
+   if cbOKCancel.Checked = true then
+        Buttons := [mbOK, mbCancel];
+     // 0 corresponde ao primeiro botao
+   if MessageDlg(edtTituloMessageDlg.Text, TypeDLG, Buttons, 0) = mrYes then lbResultadoDlg.Caption := 'Clicou no mrYes' else lbResultadoDlg.Caption := 'Não clicou no mrYes';
+
+   //if MessageDlg('Imprimir', mtConfirmation, [mbYes)
+end;
+
+procedure TfrmCaixasdeDialogo.cbOKCancelExit(Sender: TObject);
+begin
+  if cbOKCancel.Checked = True then
+    if not cbYES.Checked or not cbNO.Checked then cbOKCancel.Checked := True else begin Showmessage('Desmarquei Yes e o No'); cbYES.Checked := false; cbNO.Checked := false; END
+end;
+
+procedure TfrmCaixasdeDialogo.btnMessageBoxClick(Sender: TObject);
+var
+  chooseButton,chooseIcon :Cardinal;
+begin
+
+  if cbMessageBoxIcone.ItemIndex = 0 then
+    chooseIcon := MB_ICONWARNING
+  else if cbMessageBoxIcone.ItemIndex = 1 then
+    chooseIcon := MB_ICONINFORMATION
+  else if cbMessageBoxIcone.ItemIndex = 2 then
+    chooseIcon := MB_ICONQUESTION
+  else if cbMessageBoxIcone.ItemIndex = 3 then
+    chooseIcon := MB_ICONSTOP;
+
+  if cbMessageBoxBotoes.ItemIndex = 0 then
+     chooseButton := MB_OK
+  else if cbMessageBoxBotoes.ItemIndex = 1 then
+     chooseButton := MB_OKCANCEL
+  else if cbMessageBoxBotoes.ItemIndex = 2 then
+     chooseButton := MB_YESNO
+  else if cbMessageBoxBotoes.ItemIndex = 3 then
+     chooseButton := MB_YESNOCANCEL;
+
+  if MessageBox(Handle,Pchar(edtMensagemMessageBox.Text), Pchar(edtTituloMessageBox.Text), chooseButton or chooseIcon) = IDYES then
+end;
+
+procedure TfrmCaixasdeDialogo.Button1Click(Sender: TObject);
+begin
+  if FolderDialog.Execute then
+    lbFolderDialogResultado.Caption := 'Pasta : ' + FolderDialog.Path;
 end;
 
 end.

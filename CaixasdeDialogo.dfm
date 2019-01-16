@@ -1,6 +1,6 @@
 object frmCaixasdeDialogo: TfrmCaixasdeDialogo
   Left = 192
-  Top = 133
+  Top = 122
   Width = 1085
   Height = 578
   Caption = 'Caixas de Dialogo'
@@ -42,7 +42,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
       Top = 14
       Width = 1067
       Height = 524
-      ActivePage = tsSavePictureDialog
+      ActivePage = tsDialogPersonalizado
       Align = alClient
       TabOrder = 0
       object tsOpenDialog: TTabSheet
@@ -457,7 +457,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           object lbDesMemoOpen: TLabel
             Left = 1
             Top = 4
-            Width = 1057
+            Width = 265
             Height = 13
             Align = alBottom
             Caption = 'Memo utilizado para mostrar o arquivo .TXT selecionado'
@@ -753,7 +753,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           object lbDesMemoSave: TLabel
             Left = 1
             Top = 2
-            Width = 1057
+            Width = 180
             Height = 13
             Align = alBottom
             Caption = 'Memo utilizado para salvar um arquivo'
@@ -943,7 +943,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           object lbInstrucoesMemoPrint: TLabel
             Left = 1
             Top = -1
-            Width = 1057
+            Width = 196
             Height = 13
             Align = alBottom
             Caption = 'Escreva algo aqui e clique em PrintDialog'
@@ -2608,7 +2608,6 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          OnClick = btnOpenPictureDialogClick
         end
       end
       object tsSavePictureDialog: TTabSheet
@@ -2629,7 +2628,373 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           TabOrder = 0
         end
       end
+      object tsOutrasDialog: TTabSheet
+        Caption = 'Outras Dialog'
+        ImageIndex = 11
+        object Label2: TLabel
+          Left = 496
+          Top = 240
+          Width = 32
+          Height = 13
+          Caption = 'Label2'
+        end
+        object Label3: TLabel
+          Left = 4
+          Top = 8
+          Width = 94
+          Height = 13
+          Caption = 'SHBrowseForFolder'
+        end
+        object Label4: TLabel
+          Left = 5
+          Top = 24
+          Width = 79
+          Height = 13
+          Caption = 'BrowseForFolder'
+        end
+        object gbMessageDlg: TGroupBox
+          Left = 464
+          Top = 0
+          Width = 595
+          Height = 177
+          Caption = 'MessageDlg'
+          TabOrder = 0
+          object lbTituloMessageDlg: TLabel
+            Left = 215
+            Top = 12
+            Width = 52
+            Height = 13
+            Caption = 'Mensagem'
+          end
+          object lbOutrosBotoesMessageDlg: TLabel
+            Left = 214
+            Top = 58
+            Width = 117
+            Height = 13
+            Caption = 'Outra Op'#231#245'es de Bot'#245'es'
+          end
+          object lbResultadoDlg: TLabel
+            Left = 50
+            Top = 153
+            Width = 116
+            Height = 13
+            Caption = 'Resultado MessageDlg: '
+          end
+          object btnMessageDlg: TButton
+            Left = 16
+            Top = 16
+            Width = 105
+            Height = 25
+            Caption = 'MessageDlg'
+            TabOrder = 0
+            OnClick = btnMessageDlgClick
+          end
+          object cbMessageDlg: TComboBox
+            Left = 16
+            Top = 50
+            Width = 145
+            Height = 21
+            ItemHeight = 13
+            ItemIndex = 0
+            TabOrder = 1
+            Text = 'mtWarning'
+            Items.Strings = (
+              'mtWarning'
+              'mtError'
+              'mtInformation'
+              'mtConfirmation'
+              'mtCustom')
+          end
+          object edtTituloMessageDlg: TEdit
+            Left = 214
+            Top = 28
+            Width = 375
+            Height = 21
+            TabOrder = 2
+          end
+          object memoMessageDlg: TMemo
+            Left = 213
+            Top = 74
+            Width = 377
+            Height = 97
+            Lines.Strings = (
+              'mbYesNoCancel = [mbYes, mbNo, mbCancel];'
+              
+                'mbYesAllNoAllCancel = [mbYes, mbYesToAll, mbNo, mbNoToAll, mbCan' +
+                'cel];'
+              'mbOKCancel = [mbOK, mbCancel];'
+              'mbAbortRetryIgnore = [mbAbort, mbRetry, mbIgnore];'
+              'mbAbortIgnore = [mbAbort, mbIgnore];')
+            TabOrder = 3
+          end
+          object gbAlgunsBotoesMessageDlg: TGroupBox
+            Left = 16
+            Top = 74
+            Width = 193
+            Height = 71
+            Caption = 'Algumas Op'#231#245'es de Bot'#245'es'
+            TabOrder = 4
+            object cbNO: TCheckBox
+              Left = 72
+              Top = 16
+              Width = 57
+              Height = 17
+              Caption = 'No'
+              TabOrder = 0
+            end
+            object cbYES: TCheckBox
+              Left = 8
+              Top = 16
+              Width = 57
+              Height = 17
+              Caption = 'Yes'
+              TabOrder = 1
+            end
+            object cbOKCancel: TCheckBox
+              Left = 8
+              Top = 40
+              Width = 97
+              Height = 17
+              Caption = 'OKCancel'
+              TabOrder = 2
+              OnExit = cbOKCancelExit
+            end
+          end
+        end
+        object gbMessageBox: TGroupBox
+          Left = 464
+          Top = 178
+          Width = 595
+          Height = 111
+          Caption = 'MessageBox'
+          TabOrder = 1
+          object lbcbMessageBoxIcone: TLabel
+            Left = 16
+            Top = 56
+            Width = 86
+            Height = 13
+            Caption = 'Selecione o '#205'cone'
+          end
+          object lbMessageBoxBotoes: TLabel
+            Left = 168
+            Top = 56
+            Width = 87
+            Height = 13
+            Caption = 'Seleciona o Bot'#227'o'
+          end
+          object lbMensagemMessageBox: TLabel
+            Left = 128
+            Top = 29
+            Width = 52
+            Height = 13
+            Caption = 'Mensagem'
+          end
+          object lbTituloMessageBox: TLabel
+            Left = 312
+            Top = 29
+            Width = 87
+            Height = 13
+            Caption = 'Selecione o T'#237'tulo'
+          end
+          object lbAlertaMessageBox: TLabel
+            Left = 488
+            Top = 88
+            Width = 95
+            Height = 13
+            Caption = 'TApplication ou n'#227'o'
+          end
+          object btnMessageBox: TButton
+            Left = 16
+            Top = 24
+            Width = 75
+            Height = 25
+            Caption = 'MessageBox'
+            TabOrder = 0
+            OnClick = btnMessageBoxClick
+          end
+          object cbMessageBoxIcone: TComboBox
+            Left = 16
+            Top = 74
+            Width = 145
+            Height = 21
+            ItemHeight = 13
+            TabOrder = 1
+            Text = 'MB_ICONWARNING'
+            Items.Strings = (
+              'MB_ICONWARNING'
+              'MB_ICONINFORMATION'
+              'MB_ICONQUESTION'
+              'MB_ICONSTOP')
+          end
+          object cbMessageBoxBotoes: TComboBox
+            Left = 168
+            Top = 73
+            Width = 145
+            Height = 21
+            ItemHeight = 13
+            ItemIndex = 0
+            TabOrder = 2
+            Text = 'MB_OK'
+            Items.Strings = (
+              'MB_OK'
+              'MB_OKCANCEL'
+              'MB_YESNO'
+              'MB_YESNOCANCEL')
+          end
+          object edtMensagemMessageBox: TEdit
+            Left = 188
+            Top = 26
+            Width = 121
+            Height = 21
+            TabOrder = 3
+          end
+          object edtTituloMessageBox: TEdit
+            Left = 404
+            Top = 26
+            Width = 121
+            Height = 21
+            TabOrder = 4
+          end
+        end
+        object gbInputBox: TGroupBox
+          Left = 240
+          Top = 2
+          Width = 217
+          Height = 187
+          Caption = 'InputBox'
+          TabOrder = 2
+          object lbInputBox: TLabel
+            Left = 67
+            Top = 164
+            Width = 96
+            Height = 13
+            Caption = 'Resultado Input Box'
+          end
+          object lbTituloInputBox: TLabel
+            Left = 8
+            Top = 48
+            Width = 28
+            Height = 13
+            Caption = 'T'#237'tulo'
+          end
+          object lblMensagemInputBox: TLabel
+            Left = 8
+            Top = 87
+            Width = 52
+            Height = 13
+            Caption = 'Mensagem'
+          end
+          object Label5: TLabel
+            Left = 9
+            Top = 125
+            Width = 64
+            Height = 13
+            Caption = 'Texto Padr'#227'o'
+          end
+          object btnInputBox: TButton
+            Left = 64
+            Top = 16
+            Width = 75
+            Height = 25
+            Caption = 'Input Box'
+            TabOrder = 0
+            OnClick = btnInputBoxClick
+          end
+          object edtTituloInputBox: TEdit
+            Left = 8
+            Top = 62
+            Width = 201
+            Height = 21
+            TabOrder = 1
+          end
+          object edtMensagemInputBox: TEdit
+            Left = 8
+            Top = 101
+            Width = 201
+            Height = 21
+            TabOrder = 2
+          end
+          object edtTextoPadraoInputBox: TEdit
+            Left = 8
+            Top = 140
+            Width = 201
+            Height = 21
+            TabOrder = 3
+          end
+        end
+        object cbInputQuery: TGroupBox
+          Left = 240
+          Top = 192
+          Width = 217
+          Height = 97
+          Caption = 'InputQuery'
+          TabOrder = 3
+          object Label6: TLabel
+            Left = 16
+            Top = 16
+            Width = 131
+            Height = 13
+            Caption = 'Altere o nome do Formul'#225'rio'
+          end
+          object btnInputQuery: TButton
+            Left = 16
+            Top = 40
+            Width = 75
+            Height = 25
+            Caption = 'InputQuery'
+            TabOrder = 0
+            OnClick = btnInputQueryClick
+          end
+        end
+        object gbShowMessageFmt: TGroupBox
+          Left = 240
+          Top = 288
+          Width = 817
+          Height = 65
+          Caption = 'ShowMessageFmt'
+          TabOrder = 4
+          object lbExemploShowMessageFmt: TLabel
+            Left = 120
+            Top = 29
+            Width = 673
+            Height = 13
+            Caption = 
+              '  ShowMessageFmt('#39'O nome do formul'#225'rio %s e o top %d e %d left e' +
+              'stao sendo passados como argumento direto no texto'#39',[Caption, Le' +
+              'ft, Top]);'
+          end
+          object btnShowMessageFmt: TButton
+            Left = 8
+            Top = 24
+            Width = 105
+            Height = 25
+            Caption = 'ShowMessageFmt'
+            TabOrder = 0
+            OnClick = btnShowMessageFmtClick
+          end
+        end
+      end
+      object tsDialogPersonalizado: TTabSheet
+        Caption = 'Dialog Personalizado'
+        ImageIndex = 12
+        object lbFolderDialogResultado: TLabel
+          Left = 104
+          Top = 16
+          Width = 27
+          Height = 13
+          Caption = 'Pasta'
+        end
+      end
     end
+  end
+  object Button1: TButton
+    Left = 8
+    Top = 48
+    Width = 89
+    Height = 25
+    Caption = 'Escolher Pasta'
+    TabOrder = 1
+    OnClick = Button1Click
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = 'txt'
@@ -2703,7 +3068,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
     Top = 484
   end
   object SavePictureDialog1: TSavePictureDialog
-    Left = 429
-    Top = 486
+    Left = 430
+    Top = 484
   end
 end
