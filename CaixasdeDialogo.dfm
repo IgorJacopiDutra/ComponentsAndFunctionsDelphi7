@@ -457,7 +457,7 @@ object frmCaixasdeDialogo: TfrmCaixasdeDialogo
           object lbDesMemoOpen: TLabel
             Left = 1
             Top = 4
-            Width = 265
+            Width = 1057
             Height = 13
             Align = alBottom
             Caption = 'Memo utilizado para mostrar o arquivo .TXT selecionado'

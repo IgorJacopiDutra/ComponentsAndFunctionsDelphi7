@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls, Printers, DB, DBTables, DBCtrls,
-  Grids, DBGrids, StrUtils, ExtDlgs ;
+  Grids, DBGrids, StrUtils, ExtDlgs, Menus ;
 
 type
   TfrmCaixasdeDialogo = class(TForm)
@@ -304,6 +304,7 @@ type
     procedure cbOKCancelExit(Sender: TObject);
     procedure btnMessageBoxClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Sair1Click(Sender: TObject);
   private
     { Private declarations }
     procedure imprimirMemo;
@@ -880,6 +881,11 @@ procedure TfrmCaixasdeDialogo.Button1Click(Sender: TObject);
 begin
   if FolderDialog.Execute then
     lbFolderDialogResultado.Caption := 'Pasta : ' + FolderDialog.Path;
+end;
+
+procedure TfrmCaixasdeDialogo.Sair1Click(Sender: TObject);
+begin
+   Close;
 end;
 
 end.

@@ -1,8 +1,10 @@
 object frmPrincipal: TfrmPrincipal
-  Left = 223
-  Top = 166
+  Left = 211
+  Top = 118
   Width = 928
   Height = 480
+  AlphaBlend = True
+  AlphaBlendValue = 0
   Caption = 'Escolha o T'#243'pico que deseja verificar'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -144,6 +146,42 @@ object frmPrincipal: TfrmPrincipal
     TabOrder = 8
     Text = 'VAL_COMISSAO'
   end
+  object btnMainMenu: TButton
+    Left = 168
+    Top = 40
+    Width = 161
+    Height = 57
+    Caption = 'MainMenu'
+    TabOrder = 9
+    OnClick = btnMainMenuClick
+  end
+  object btnXML: TButton
+    Left = 344
+    Top = 40
+    Width = 161
+    Height = 57
+    Caption = 'XML'
+    TabOrder = 10
+    OnClick = btnXMLClick
+  end
+  object btnComponentesBasicos: TButton
+    Left = 8
+    Top = 104
+    Width = 145
+    Height = 57
+    Caption = 'Componentes B'#225'sicos'
+    TabOrder = 11
+    OnClick = btnComponentesBasicosClick
+  end
+  object btnCanvas: TButton
+    Left = 168
+    Top = 104
+    Width = 161
+    Height = 57
+    Caption = 'Canvas'
+    TabOrder = 12
+    OnClick = btnCanvasClick
+  end
   object DataSource1: TDataSource
     DataSet = tbTemporaria
     Left = 8
@@ -172,5 +210,11 @@ object frmPrincipal: TfrmPrincipal
       Precision = 9
       Size = 2
     end
+  end
+  object Timer1: TTimer
+    Interval = 1
+    OnTimer = Timer1Timer
+    Left = 872
+    Top = 8
   end
 end
