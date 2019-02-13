@@ -182,6 +182,33 @@ object frmPrincipal: TfrmPrincipal
     TabOrder = 12
     OnClick = btnCanvasClick
   end
+  object btnEmail: TButton
+    Left = 344
+    Top = 104
+    Width = 161
+    Height = 57
+    Caption = 'E-mail'
+    TabOrder = 13
+    OnClick = btnEmailClick
+  end
+  object btnThread: TButton
+    Left = 520
+    Top = 40
+    Width = 161
+    Height = 57
+    Caption = 'Thread'
+    TabOrder = 14
+    OnClick = btnThreadClick
+  end
+  object btnExcel: TButton
+    Left = 520
+    Top = 104
+    Width = 161
+    Height = 57
+    Caption = 'Excel'
+    TabOrder = 15
+    OnClick = btnExcelClick
+  end
   object DataSource1: TDataSource
     DataSet = tbTemporaria
     Left = 8

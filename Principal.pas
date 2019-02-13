@@ -35,6 +35,9 @@ type
     btnComponentesBasicos: TButton;
     btnCanvas: TButton;
     Timer1: TTimer;
+    btnEmail: TButton;
+    btnThread: TButton;
+    btnExcel: TButton;
     procedure btnCaixasdeDialogoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnConectarTabelaClick(Sender: TObject);
@@ -43,6 +46,9 @@ type
     procedure btnComponentesBasicosClick(Sender: TObject);
     procedure btnCanvasClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure btnEmailClick(Sender: TObject);
+    procedure btnThreadClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +61,8 @@ var
 
 implementation
 
-uses MainMenu, ManipulandoXML, ComponentesBasicos, Canvas;
+uses MainMenu, ManipulandoXML, ComponentesBasicos, Canvas, Email, Thread,
+  Excel;
 
 {$R *.dfm}
 
@@ -110,6 +117,28 @@ begin
   begin
     timer1.enabled := false;
   end;
+end;
+
+procedure TfrmPrincipal.btnEmailClick(Sender: TObject);
+begin
+   frmEmail.Show;
+end;
+
+procedure TfrmPrincipal.btnThreadClick(Sender: TObject);
+begin
+   frmThread.Show;
+end;
+
+procedure TfrmPrincipal.btnExcelClick(Sender: TObject);
+begin
+   if tbTemporaria.Active = true then begin
+     if tbTemporaria.RecordCount >= 0 then
+        frmExcel.Show
+     else
+        showmessage('Conectar uma Tabela com Registro');
+   end else begin
+      showmessage('Conectar o Banco de Dados');
+   end;
 end;
 
 end.

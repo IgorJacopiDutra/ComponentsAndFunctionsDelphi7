@@ -10,7 +10,12 @@ uses
   ManipulandoXML in 'ManipulandoXML.pas' {frmManipulandoXML},
   ComponentesBasicos in 'ComponentesBasicos.pas' {frmComponentesBasicos},
   Canvas in 'Canvas.pas' {frmCanvas},
-  Splash in 'Splash.pas' {frmSplash};
+  Splash in 'Splash.pas' {frmSplash},
+  Email in 'Email.pas' {frmEmail},
+  Thread in 'Thread.pas' {frmThread},
+  U_Thread in 'U_Thread.pas',
+  Excel in 'Excel.pas' {frmExcel},
+  U_Excel in 'U_Excel.pas';
 
 {$R *.res}
 
@@ -25,7 +30,9 @@ begin
   Application.CreateForm(TfrmComponentesBasicos, frmComponentesBasicos);
   Application.CreateForm(TfrmCanvas, frmCanvas);
   Application.CreateForm(TfrmSplash, frmSplash);
-
+  Application.CreateForm(TfrmEmail, frmEmail);
+  Application.CreateForm(TfrmThread, frmThread);
+  Application.CreateForm(TfrmExcel, frmExcel);
   frmSplash.Show; //Abre o Form2
   frmSplash.Refresh;//Atualiza o Form2
   Sleep(4000);//Tempo da splash apos acabar abre o form principal aqui 8 seg;
